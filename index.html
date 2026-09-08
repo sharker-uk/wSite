@@ -1,15 +1,217 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Harker Family</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-slate-50 font-['Inter',sans-serif]">
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Harker Family</title>
+  <style>
+    :root {
+      --bg-dark: #0f1319;
+      --bg-card: rgba(26, 32, 44, 0.75);
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.08);
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 20% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 85%, rgba(99, 102, 241, 0.08) 0%, transparent 40%);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 1.5rem;
+    }
+
+    header {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55e;
+      animation: pulse 2.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.9); }
+    }
+
+    main {
+      width: 100%;
+      max-width: 680px;
+      margin: auto 0;
+    }
+
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      text-align: center;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+
+    .icon-badge {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1.75rem;
+      background: var(--accent-glow);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.75rem;
+      color: #fff;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0 auto 2.25rem;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin-bottom: 2rem;
+    }
+
+    .contact-box {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .contact-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .email-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.05rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: 10px;
+      background: rgba(56, 189, 248, 0.06);
+      border: 1px solid rgba(56, 189, 248, 0.15);
+      transition: all 0.2s ease;
+    }
+
+    .email-link:hover {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: rgba(56, 189, 248, 0.35);
+      transform: translateY(-1px);
+    }
+
+    footer {
+      width: 100%;
+      max-width: 680px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 2.25rem 1.5rem;
+      }
+      h1 {
+        font-size: 1.75rem;
+      }
+      .subtitle {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="status-pill">
+      <span class="status-dot"></span>
+      <span>Domain Active</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="card">
+      <div class="icon-badge">🏡</div>
+      <h1>harkerfamily.uk</h1>
+      <p class="subtitle">Our corner of the web. This domain is reserved for family projects, mail services, and upcoming web spaces.</p>
+      
+      <div class="divider"></div>
+
+      <div class="contact-box">
+        <span class="contact-label">Get in touch</span>
+        <a href="mailto:hello@harkerfamily.uk" class="email-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          hello@harkerfamily.uk
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Harker Family. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
